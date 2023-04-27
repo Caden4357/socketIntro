@@ -20,7 +20,7 @@ const Memes = (props) => {
 
     const sendMessage = (e) => {
         e.preventDefault();
-        socket.emit('message-meme-room', {message:message, username:username})
+        socket.emit('message-meme-room', {date:new Date().toLocaleTimeString() ,message:message, username:username})
         setMessage('')
     }
     return (
@@ -32,22 +32,24 @@ const Memes = (props) => {
                     <p key={user.id}>user: {user.username}</p>
                 ))
             }
-            <div className='chat-box'>
-                <div className='d-flex flex-column'>
+            <div className='chat-box border'>
+                <div className='d-flex flex-column p-5'>
                     {
                         messages.map((message, idx) => {
                             if(message.username === username){
                                 return (
                                     <div key={idx} className='indv-messages user'>
-                                        <h3>{message.username}</h3>
+                                        <h3>{message.username} says:</h3>
                                         <p>{message.message}</p>
+                                        <span>{message.date}</span>
                                     </div>
                                 )
                             }else{
                                 return (
                                     <div key={idx} className='indv-messages'>
-                                        <h3>{message.username}</h3>
+                                        <h3>{message.username} says:</h3>
                                         <p>{message.message}</p>
+                                        <span>{message.date}</span>
                                     </div>
                                 )
                             }
