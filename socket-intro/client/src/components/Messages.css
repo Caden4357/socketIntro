@@ -42,7 +42,10 @@
 }
 
 .indv-messages {
+    /* scroll-snap-align: end; */
     border: 2px solid red;
+    overflow-wrap: break-word;
+
     margin: 10px 0px;
     max-width: 400px;
     /* background-color: rgb(227, 227, 227); */
@@ -66,8 +69,9 @@
 p {
     font-weight: bold;
     font-size: 1.6rem;
-    border-bottom: 0.2rem solid #fff;
-    border-radius: 2rem;
+    padding-bottom: 10px;
+    border-bottom: 0.1rem solid #fff;
+    border-radius: 10px;
 }
 
 .user {
