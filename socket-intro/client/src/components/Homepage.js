@@ -5,8 +5,6 @@ const Homepage = (props) => {
     const navigate = useNavigate()
     const {socket, username} = props
     const [users, setUsers] = useState([])
-    const [usersThatLeft, setUsersThatLeft] = useState([])
-    const [messageRecieved, setMessageRecieved] = useState([])
 
     useEffect(() => {
         socket.on('new-user-joined-server', users => {

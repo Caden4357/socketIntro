@@ -1,11 +1,10 @@
 import React, {useState, useRef, useEffect} from 'react';
+import MessageForm from './MessageForm';
 
 const Messages = (props) => {
     const {socket, username} = props
     const messageRef = useRef(null)
     const [messages, setMessages] = useState([])
-    const [message, setMessage] = useState('')
-
 
     // ! broadcast message
     useEffect(() => {
@@ -20,11 +19,6 @@ const Messages = (props) => {
     }, [messages]);
 
     
-    const sendMessage = (e) => {
-        e.preventDefault();
-        socket.emit('message-meme-room', { date: new Date().toLocaleTimeString(), message: message, username: username })
-        setMessage('')
-    }
     return (
         <div className='chat-box border'>
             <div className='d-flex flex-column p-5'>
@@ -51,12 +45,7 @@ const Messages = (props) => {
                 }
                 <div ref={messageRef}></div>
             </div> 
-            <div className='message-form'>
-                <form onSubmit={sendMessage}>
-                    <input type="text" name="message" onChange={(e) => setMessage(e.target.value)} value={message} />
-                    <button className='btn btn-primary'>Send</button>
-                </form>
-            </div>
+            <MessageForm socket={socket} username={username}/>
         </div>
 )
 }

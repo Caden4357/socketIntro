@@ -1,29 +1,21 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState} from 'react';
 
 const MessageForm = (props) => {
-    const navigate = useNavigate()
-    const { socket, username, usersInMemes, setUsersInMemes } = props
-    const leaveRoom = () => {
-        const updatedUsers = usersInMemes.map((user) => user.username !== username)
-        console.log(updatedUsers);
-        setUsersInMemes(updatedUsers)
-        socket.emit('user-leaving-memes', socket.id)
-        navigate('/')
-    }
+    const {socket, username} = props
+    const [message, setMessage] = useState('')
 
+    const sendMessage = (e) => {
+        e.preventDefault();
+        socket.emit('message-meme-room', { date: new Date().toLocaleTimeString(), message: message, username: username })
+        setMessage('')
+    }
     return (
-        <div>
-            <h1>Welcome to memes: {username}</h1>
-            <button onClick={leaveRoom}>Leave Memes</button>
-            <h2>Chat with any users in this channel:</h2>
-            {
-                usersInMemes.map((user, id) => (
-                    <p key={id}>user: {user.username}</p>
-                ))
-            }
-        </div>
-    )
-}
+        <div className='message-form'>
+        <form onSubmit={sendMessage}>
+            <input type="text" name="message" onChange={(e) => setMessage(e.target.value)} value={message} />
+            <button className='btn btn-primary'>Send</button>
+        </form>
+    </div>
+)}
 
 export default MessageForm;

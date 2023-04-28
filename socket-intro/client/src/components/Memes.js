@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './Messages.css'
 import Messages from './Messages';
-import MessageForm from './MessageForm';
+import UsersInRoom from './UsersInRoom';
 const Memes = (props) => {
-    const navigate = useNavigate()
     const { socket, username } = props
     const [usersInMemes, setUsersInMemes] = useState([])
     
@@ -28,7 +26,7 @@ const Memes = (props) => {
 
     return (
         <div>
-            <MessageForm username={username} socket={socket} usersInMemes={usersInMemes} setUsersInMemes={setUsersInMemes}/>
+            <UsersInRoom username={username} socket={socket} usersInMemes={usersInMemes} setUsersInMemes={setUsersInMemes}/>
             <Messages socket={socket} username={username}/>
         </div>
     )
