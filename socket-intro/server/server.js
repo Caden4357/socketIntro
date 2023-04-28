@@ -20,7 +20,8 @@ const io = socket(server, {
         credentials: true,
     }
 });
-// let messages = []
+
+
 let users = []
 let usersInMemes = []
 io.on("connection", socket => {
@@ -30,47 +31,36 @@ io.on("connection", socket => {
     console.log('user connected with this id: ' + socket.id);
     socket.on('disconnect', (data) => {
         console.log('User disconnected', data);
-        // let newUsers = users.map((user) => {
-        //     if(user.id === )
-        // })
     })
-    socket.on('user-left', (userThatLeft) => {
-        console.log('HEREEE');
-        console.log(userThatLeft);
-        let updatedUsers = users.filter((user) => user.username !== userThatLeft)
-        users = updatedUsers
-        console.log(users);
-        io.emit('current-users-in-room', {users:users, userThatLeft:userThatLeft})
-    })
+
     // We add our additional event listeners right inside this function
     // NOTE: "connection" is a BUILT IN events listener
-    socket.on("event_from_client", message => {
-        console.log('MESSAGE', message);
-        // messages.push(message)
-        // send a message with "data" to ALL clients EXCEPT for the one that emitted the
-    	//     "event_from_client" event
-        io.emit("event_to_all_other_clients", message);
-    });
+    // ! Joining main server
     socket.on('join-server', username => {
-        console.log('USERNAME', username);
         let newUser = {id:socket.id, username: username}
         users.push(newUser)
-        console.log(users);
 
         io.emit('new-user-joined-server', users)
     })
 
+    // ! Joining memes room
     socket.on('join-memes', data => {
-        // console.log(data.room);
         socket.join(data.room)
-        // console.log(socket);
         let newUser = {id:socket.id, username: data.username}
         usersInMemes.push(newUser)
 
         io.to(data.room).emit("new-user-joined-memes", usersInMemes)
     })
+    // ! Leaving memes room
+    socket.on('user-leaving-memes', (userThatLeft) => {
+        let updatedUsers = usersInMemes.filter((user) => user.id !== userThatLeft)
+        socket.leave('memes')
+        usersInMemes = updatedUsers
+        io.to('memes').emit('current-users-in-room', usersInMemes)
+    })
+    
+    // ! Messaging meme room
     socket.on('message-meme-room', data => {
-        console.log(data);
         io.emit('broadcast-messages-to-memes', data)
     })
 });

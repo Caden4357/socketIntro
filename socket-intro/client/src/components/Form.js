@@ -8,7 +8,6 @@ const Form = (props) => {
     const joinServer = (e) => {
         e.preventDefault();
         socket.emit('join-server', username)
-        
         navigate('/homepage')
     }
 

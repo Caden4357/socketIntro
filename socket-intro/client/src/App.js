@@ -13,10 +13,7 @@ function App() {
   // const navigate = useNavigate()
   const [socket] = useState(() => io(':8000'));
   const [isConnected, setIsConnected] = useState(socket.connected);
-  // const [messageRecieved, setMessageRecieved] = useState('')
-  // const [messageList, setMessageList] = useState([])
-  // const [input, setInput] = useState('')
-  // const [id, setId] = useState('')
+
   const [username, setUsername] = useState('')
   
 
@@ -49,23 +46,6 @@ function App() {
           username={username} setUsername={setUsername}/>}/>
         </Routes>
     </BrowserRouter>
-      {/* <form onSubmit={submitHandler}>
-        <label>Send Message: </label>
-        <input type="text" value={input} onChange={(e) => setInput(e.target.value)}/>
-        <button>send</button>
-      </form>
-      {
-        messageRecieved.message?
-        <h2>{messageRecieved.username} says: {messageRecieved.message}</h2>:
-        null
-
-      } */}
-      {/* {
-        messageList.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))
-      } */}
-      {/* {messageRecieved} */}
     </div>
   );
 }
