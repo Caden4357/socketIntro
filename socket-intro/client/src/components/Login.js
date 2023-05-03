@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import './Login.css'
 const Login = (props) => {
     const navigate = useNavigate()
     const [login, setLogin] = useState({
@@ -25,16 +26,18 @@ const Login = (props) => {
             })
     }
     return (
-        <form className='w-25 mx-auto' onSubmit={submitHandler}>
-            <h1>Login</h1>
-            <label className='form-label'>Email: </label>
-            <input className='form-control' type="text" name="email" onChange={changeHandler} value={login.email}/>
-            <label className='form-label'>Password: </label>
-            <input className='form-control' type="password" name="password" onChange={changeHandler} value={login.password}/>
-            <button className='btn mt-3'>Login</button>
-            <br />
-            <Link to={'/register'}>Dont have an account? Sign up here</Link>
-        </form>
+        <div className='form-wrapper'>
+            <form className='w-25 mx-auto p-3' onSubmit={submitHandler}>
+                <h1>Login</h1>
+                <label className='form-label'>Email: </label>
+                <input className='form-control' type="text" name="email" onChange={changeHandler} value={login.email}/>
+                <label className='form-label'>Password: </label>
+                <input className='form-control' type="password" name="password" onChange={changeHandler} value={login.password}/>
+                <button className='btn btn-secondary mt-3'>Login</button>
+                <br />
+                <Link to={'/register'}>Dont have an account? Sign up here</Link>
+            </form>
+        </div>
 )}
 
 export default Login;
