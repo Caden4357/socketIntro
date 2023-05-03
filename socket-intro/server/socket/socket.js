@@ -25,6 +25,7 @@ io.on("connection", socket => {
     // ! Joining memes room
     socket.on('join-memes', data => {
         socket.join(data.room)
+        console.log(data);
         let newUser = { id: socket.id, username: data.username }
         usersInMemes.push(newUser)
 

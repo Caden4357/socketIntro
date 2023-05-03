@@ -6,6 +6,8 @@ import Form from './components/Form';
 import Homepage from './components/Homepage';
 import Memes from './components/Memes';
 import Nav from './components/Nav';
+import Login from './components/Login';
+import { UserProvider } from './context/userContext';
 
 function App() {
   // notice that we pass a callback function to initialize the socket
@@ -37,15 +39,18 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Nav/>
-        <Routes>
-          <Route path='/' element={<Form socket={socket} username={username} setUsername={setUsername}/>}/>
-          <Route path='/homepage' element={<Homepage socket={socket} username={username} setUsername={setUsername}/>}/>
-          <Route path='/memes' element={<Memes socket={socket}
-          username={username} setUsername={setUsername}/>}/>
-        </Routes>
-    </BrowserRouter>
+      <UserProvider>
+        <BrowserRouter>
+          <Nav/>
+          <Routes>
+            {/* <Route path='/' element={<Form socket={socket} username={username} setUsername={setUsername}/>}/> */}
+            <Route path='/' element={<Login/>}/>
+            <Route path='/homepage' element={<Homepage socket={socket} username={username} setUsername={setUsername}/>}/>
+            <Route path='/memes' element={<Memes socket={socket}
+            username={username} setUsername={setUsername}/>}/>
+          </Routes>
+        </BrowserRouter>
+      </UserProvider>
     </div>
   );
 }

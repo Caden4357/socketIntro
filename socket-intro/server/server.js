@@ -5,7 +5,7 @@ const socket = require('socket.io');
 const port = 8000;
 const cookieParser = require('cookie-parser')
 require('dotenv').config()
-app.use(cors());
+app.use(cors({credentials:true, origin:'http://localhost:3000'}))
 const server = app.listen(port, () => {
     console.log(`Listening on port: ${port}`)
 });

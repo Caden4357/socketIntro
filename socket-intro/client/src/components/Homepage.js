@@ -1,28 +1,41 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Link, useNavigate} from 'react-router-dom';
-
+import {userContext} from '../context/userContext'
+import axios from 'axios';
 const Homepage = (props) => {
+    const {loggedInUser, setLoggedInUser} = useContext(userContext);
+    const uuid = window.localStorage.getItem('uuid');
+    
     const navigate = useNavigate()
     const {socket, username} = props
     const [users, setUsers] = useState([])
-
+    console.log(uuid);
     useEffect(() => {
+        axios.get(`http://localhost:8000/api/loggedInUser/${uuid}`)
+            .then((res) => {
+                // console.log(res);
+                setLoggedInUser(res.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
         socket.on('new-user-joined-server', users => {
             console.log(users);
             setUsers(users)
         })
+        
 
     }, [])
 
 
     const joinMemesRoom = () => {
-        socket.emit('join-memes', {room:'memes', username:username })
+        socket.emit('join-memes', {room:'memes', username:loggedInUser.username })
         navigate('/memes')
     }
 
     return (
         <div>
-            <h1>Welcome to the server {username}</h1>
+            <h1>Welcome to the server {loggedInUser.username}</h1>
             <h2>Which room would you like to go to?</h2>
             <button onClick={joinMemesRoom} className='btn btn-dark'>Memes</button>
             <button className='btn btn-dark'>Politics</button>

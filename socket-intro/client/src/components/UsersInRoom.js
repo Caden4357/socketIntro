@@ -10,7 +10,7 @@ const UsersInRoom = (props) => {
         console.log(updatedUsers);
         setUsersInMemes(updatedUsers)
         socket.emit('user-leaving-memes', socket.id)
-        navigate('/')
+        navigate('/homepage')
     }
 
     return (

@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
-
+import React, {useState, useContext} from 'react';
+import { userContext } from '../context/userContext';
 const MessageForm = (props) => {
+    const {loggedInUser, setLoggedInUser} = useContext(userContext);
     const {socket, username} = props
     const [message, setMessage] = useState('')
 
     const sendMessage = (e) => {
         e.preventDefault();
-        socket.emit('message-meme-room', { date: new Date().toLocaleTimeString(), message: message, username: username })
+        socket.emit('message-meme-room', { date: new Date().toLocaleTimeString(), message: message, username: loggedInUser.username })
         setMessage('')
     }
     return (

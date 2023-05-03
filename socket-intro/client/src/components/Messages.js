@@ -1,7 +1,9 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useContext} from 'react';
 import MessageForm from './MessageForm';
+import { userContext } from '../context/userContext';
 
 const Messages = (props) => {
+    const {loggedInUser, setLoggedInUser} = useContext(userContext);
     const {socket, username} = props
     const messageRef = useRef(null)
     const [messages, setMessages] = useState([])
@@ -24,7 +26,7 @@ const Messages = (props) => {
             <div className='d-flex flex-column p-5'>
                 {
                     messages.map((message, idx) => {
-                        if (message.username === username) {
+                        if (message.username === loggedInUser.username) {
                             return (
                                 <div key={idx} className='indv-messages user'>
                                     <h3>{message.username} says:</h3>
