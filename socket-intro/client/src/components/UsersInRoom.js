@@ -5,10 +5,10 @@ import axios from 'axios';
 const UsersInRoom = (props) => {
     const navigate = useNavigate()
     const {loggedInUser, setLoggedInUser} = useContext(userContext);
-    const { socket, username, usersInMemes, setUsersInMemes } = props;
+    const { socket, usersInMemes, setUsersInMemes } = props;
     
     const leaveRoom = () => {
-        const updatedUsers = usersInMemes.map((user) => user.username !== username)
+        const updatedUsers = usersInMemes.map((user) => user.username !== loggedInUser.username)
         console.log(updatedUsers);
         setUsersInMemes(updatedUsers)
         socket.emit('user-leaving-memes', socket.id)

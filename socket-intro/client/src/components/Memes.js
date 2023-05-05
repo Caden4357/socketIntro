@@ -3,7 +3,7 @@ import './Messages.css'
 import Messages from './Messages';
 import UsersInRoom from './UsersInRoom';
 const Memes = (props) => {
-    const { socket, username } = props
+    const { socket } = props
     const [usersInMemes, setUsersInMemes] = useState([])
     
     // ! New user joined memes
@@ -26,8 +26,8 @@ const Memes = (props) => {
 
     return (
         <div>
-            <UsersInRoom username={username} socket={socket} usersInMemes={usersInMemes} setUsersInMemes={setUsersInMemes}/>
-            <Messages socket={socket} username={username}/>
+            <UsersInRoom socket={socket} usersInMemes={usersInMemes} setUsersInMemes={setUsersInMemes}/>
+            <Messages socket={socket}/>
         </div>
     )
 }

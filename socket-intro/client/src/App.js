@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import {BrowserRouter, Link, Route, Routes, useLocation} from 'react-router-dom'
 import './App.css';
-import Form from './components/Form';
 import Homepage from './components/Homepage';
 import Memes from './components/Memes';
 import Nav from './components/Nav';
@@ -48,7 +47,6 @@ function App() {
         <Nav/>
       }
         <Routes>
-          {/* <Route path='/' element={<Form socket={socket} username={username} setUsername={setUsername}/>}/> */}
           <Route path='/' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/> 
           <Route path='/homepage' element={<Homepage socket={socket}/>}/>

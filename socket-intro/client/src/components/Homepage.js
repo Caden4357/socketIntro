@@ -6,7 +6,7 @@ const Homepage = (props) => {
     const navigate = useNavigate()
     const {loggedInUser, setLoggedInUser} = useContext(userContext);
     
-    const {socket, username} = props
+    const {socket} = props
     const [users, setUsers] = useState([])
     const uuid = window.localStorage.getItem('uuid');
     // console.log(uuid);
@@ -28,8 +28,8 @@ const Homepage = (props) => {
     }, [])
 
 
-    const joinMemesRoom = () => {
-        socket.emit('join-memes', {room:'memes', username:loggedInUser.username })
+    const joinMemesRoom = (room) => {
+        socket.emit('join-memes', {room:room, username:loggedInUser.username })
         navigate('/memes')
     }
 
@@ -37,7 +37,7 @@ const Homepage = (props) => {
         <div>
             <h1>Welcome to Chat Socket {loggedInUser.username}</h1>
             <h2>Which room would you like to go to?</h2>
-            <button onClick={joinMemesRoom} className='btn btn-dark'>Memes</button>
+            <button onClick={() => joinMemesRoom('memes')} className='btn btn-dark'>Memes</button>
             <button className='btn btn-dark'>Politics</button>
             <button className='btn btn-dark'>Science & Technology</button>
             <button className='btn btn-dark'>Sports</button>

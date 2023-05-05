@@ -5,7 +5,7 @@ import moment from 'moment';
 import axios from 'axios';
 const Messages = (props) => {
     const {loggedInUser, setLoggedInUser} = useContext(userContext);
-    const {socket, username} = props
+    const {socket} = props
     const messageRef = useRef(null)
     const [messages, setMessages] = useState([])
 
@@ -57,7 +57,7 @@ const Messages = (props) => {
                 }
                 <div ref={messageRef}></div>
             </div> 
-            <MessageForm socket={socket} username={username}/>
+            <MessageForm socket={socket}/>
         </div>
 )
 }

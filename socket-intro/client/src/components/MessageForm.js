@@ -3,7 +3,7 @@ import { userContext } from '../context/userContext';
 import axios from 'axios';
 const MessageForm = (props) => {
     const {loggedInUser, setLoggedInUser} = useContext(userContext);
-    const {socket, username} = props
+    const {socket} = props
     const [message, setMessage] = useState('')
 
     const sendMessage = (e) => {
