@@ -13,8 +13,10 @@ const MessageForm = (props) => {
     return (
         <div className='message-form'>
         <form onSubmit={sendMessage}>
-            <input type="text" name="message" onChange={(e) => setMessage(e.target.value)} value={message} />
-            <button className='btn btn-primary'>Send</button>
+            <div className='input-btn-wrapper'>
+                <input type="text" name="message" onChange={(e) => setMessage(e.target.value)} value={message} />
+                <button className='button'>Send</button>
+            </div>
         </form>
     </div>
 )}

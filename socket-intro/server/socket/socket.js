@@ -41,6 +41,7 @@ io.on("connection", socket => {
 
     // ! Messaging meme room
     socket.on('message-meme-room', data => {
+        console.log(data);
         io.emit('broadcast-messages-to-memes', data)
     })
 });

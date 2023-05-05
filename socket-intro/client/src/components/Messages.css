@@ -1,6 +1,7 @@
 .chat-box {
     border: 2px solid black;
-    background-color: rgba(132, 132, 132, 0.5);
+    /* background-color: rgba(132, 132, 132, 0.5); */
+    background-color: #0e1428;
     /* background: transparent; */
     padding: 10px;
     max-height: 600px;
@@ -17,11 +18,23 @@
 
 }
 
-.message-form {
+:root {
+    --primary-color: #4d4dff;
+    --secondary-color: #0e1428;
+    --tertiary-color: #e6e6e6;
+    --quaternary-color: #cccccc;
+    --quinary-color: #ffffff;
+    --success-color: #6abf69;
+    --warning-color: #f6c23e;
+    --danger-color: #e74c3c;
+    --info-color: #17a2b8;
+}
+
+/* .message-form {
     height: 100%;
     display: flex;
     align-items: flex-end;
-}
+} */
 
 .message-form form {
     width: 100%;
@@ -29,16 +42,32 @@
     justify-content: flex-end;
 }
 
+.input-btn-wrapper{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .message-form input {
     width: 60%;
+    /* height: 100%; */
+    border: none;
     /* box-shadow: -14px 6px 18px 0px rgba(0, 0, 0, 0.8); */
     /* border-radius: 15px; */
 }
 
-.btn {
+.button {
     /* border-radius: 15px; */
     /* box-shadow: 0px 4px 18px 0px rgba(0, 0, 0, 0.75); */
-
+    /* border-radius: 15px; */
+    /* border: 2px solid red; */
+    /* height: 100%; */
+    border: none;
+    background-color: #6abf69;
+    padding: 5px;
+    color: white;
+    font-size: large;
 }
 
 .indv-messages {
@@ -65,8 +94,7 @@
         inset 0 0 1.3rem #bc13fe;
 }
 
-.indv-messages
-p {
+.indv-messages p {
     font-weight: bold;
     font-size: 1.6rem;
     padding-bottom: 10px;

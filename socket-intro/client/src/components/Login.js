@@ -27,7 +27,7 @@ const Login = (props) => {
     }
     return (
         <div className='form-wrapper'>
-            <form className='w-25 mx-auto p-3' onSubmit={submitHandler}>
+            <form className='mx-auto p-3 user-form' onSubmit={submitHandler}>
                 <h1>Login</h1>
                 <label className='form-label'>Email: </label>
                 <input className='form-control' type="text" name="email" onChange={changeHandler} value={login.email}/>
