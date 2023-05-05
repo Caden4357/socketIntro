@@ -30,16 +30,16 @@ const Messages = (props) => {
                             return (
                                 <div key={idx} className='indv-messages user'>
                                     <h3>{message.username} says:</h3>
-                                    <p>{message.message}</p>
-                                    <span>{message.date}</span>
+                                    <p>{message.messageBody}</p>
+                                    <span>{message.createdAt}</span>
                                 </div>
                             )
                         } else {
                             return (
                                 <div key={idx} className='indv-messages'>
                                     <h3>{message.username} says:</h3>
-                                    <p>{message.message}</p>
-                                    <span>{message.date}</span>
+                                    <p>{message.messageBody}</p>
+                                    <span>{message.createdAt}</span>
                                 </div>
                             )
                         }

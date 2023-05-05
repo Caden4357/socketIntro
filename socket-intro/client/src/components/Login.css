@@ -4,7 +4,7 @@
     -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
     border-radius: 30px;
-    height: 315px;
+    /* height: 315px; */
     width: 350px;
 }
 .form-wrapper{

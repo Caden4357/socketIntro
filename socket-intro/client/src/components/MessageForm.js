@@ -1,5 +1,6 @@
 import React, {useState, useContext} from 'react';
 import { userContext } from '../context/userContext';
+import axios from 'axios';
 const MessageForm = (props) => {
     const {loggedInUser, setLoggedInUser} = useContext(userContext);
     const {socket, username} = props
@@ -7,7 +8,20 @@ const MessageForm = (props) => {
 
     const sendMessage = (e) => {
         e.preventDefault();
-        socket.emit('message-meme-room', { date: new Date().toLocaleTimeString(), message: message, username: loggedInUser.username })
+        const finalMessage = {
+            // date: new Date().toLocaleTimeString(), 
+            messageBody: message, 
+            username: loggedInUser.username,
+            room:'memes'
+        }
+        axios.post('http://localhost:8000/api/newMessage', finalMessage, {withCredentials:true})
+            .then((res) => {
+                console.log(res);
+                socket.emit('message-meme-room', res.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
         setMessage('')
     }
     return (

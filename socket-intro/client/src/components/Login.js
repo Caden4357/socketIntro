@@ -27,6 +27,7 @@ const Login = (props) => {
     }
     return (
         <div className='form-wrapper'>
+            <h1>Chat Socket</h1>
             <form className='mx-auto p-3 user-form' onSubmit={submitHandler}>
                 <h1>Login</h1>
                 <label className='form-label'>Email: </label>

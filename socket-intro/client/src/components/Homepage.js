@@ -35,7 +35,7 @@ const Homepage = (props) => {
 
     return (
         <div>
-            <h1>Welcome to the server {loggedInUser.username}</h1>
+            <h1>Welcome to Chat Socket {loggedInUser.username}</h1>
             <h2>Which room would you like to go to?</h2>
             <button onClick={joinMemesRoom} className='btn btn-dark'>Memes</button>
             <button className='btn btn-dark'>Politics</button>

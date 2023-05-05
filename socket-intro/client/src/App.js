@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import {BrowserRouter, Link, Route, Routes, useNavigate} from 'react-router-dom'
+import {BrowserRouter, Link, Route, Routes, useLocation} from 'react-router-dom'
 import './App.css';
 import Form from './components/Form';
 import Homepage from './components/Homepage';
@@ -8,15 +8,18 @@ import Memes from './components/Memes';
 import Nav from './components/Nav';
 import Login from './components/Login';
 import { UserProvider } from './context/userContext';
+import Register from './components/Register';
 
 function App() {
   // notice that we pass a callback function to initialize the socket
   // we don't need to destructure the 'setSocket' function since we won't be updating the socket state
   // const navigate = useNavigate()
+  const location = useLocation().pathname;
+  console.log(location);
   const [socket] = useState(() => io(':8000'));
   const [isConnected, setIsConnected] = useState(socket.connected);
 
-  const [username, setUsername] = useState('')
+  // const [username, setUsername] = useState('')
   
 
   useEffect(() => {
@@ -39,18 +42,18 @@ function App() {
 
   return (
     <div className="App">
-      <UserProvider>
-        <BrowserRouter>
-          <Nav/>
-          <Routes>
-            {/* <Route path='/' element={<Form socket={socket} username={username} setUsername={setUsername}/>}/> */}
-            <Route path='/' element={<Login/>}/>
-            <Route path='/homepage' element={<Homepage socket={socket} username={username} setUsername={setUsername}/>}/>
-            <Route path='/memes' element={<Memes socket={socket}
-            username={username} setUsername={setUsername}/>}/>
-          </Routes>
-        </BrowserRouter>
-      </UserProvider>
+      {
+        location === '/' || location === '/register'? 
+        null:
+        <Nav/>
+      }
+        <Routes>
+          {/* <Route path='/' element={<Form socket={socket} username={username} setUsername={setUsername}/>}/> */}
+          <Route path='/' element={<Login/>}/>
+          <Route path='/register' element={<Register/>}/> 
+          <Route path='/homepage' element={<Homepage socket={socket}/>}/>
+          <Route path='/memes' element={<Memes socket={socket}/>}/>
+        </Routes>
     </div>
   );
 }

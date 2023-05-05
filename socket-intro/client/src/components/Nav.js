@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {userContext} from '../context/userContext';
-
+import './Nav.css'
 const Nav = (props) => {
     const navigate = useNavigate();
     const {loggedInUser, setLoggedInUser} = useContext(userContext);
@@ -20,10 +20,13 @@ const Nav = (props) => {
             })
     }
     return (
-        <div>
-            <Link to={'/homepage'}>Home</Link>
-            <button className='btn btn-danger ms-5' onClick={logout}>Logout</button>
-        </div>
+        <nav>
+            <h1>Chat Socket</h1>
+            <div>
+                <Link to={'/homepage'} ><button className='nav-btn'>Home</button></Link>
+                <button className='nav-btn logout' onClick={logout}>Logout</button>
+            </div>
+        </nav>
 )}
 
 export default Nav;

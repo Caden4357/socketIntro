@@ -4,15 +4,19 @@ const MessageSchema = new mongoose.Schema({
 
     username:{
         type:String,
+        // type:mongoose.Types.ObjectId,
+        // ref:"User",
         required:[true, 'Username is required']
+    },
+    room:{
+        type:String,
+        // type:mongoose.Types.ObjectId,
+        // ref:"Room",
+        required:[true, 'Room is required']
     },
     messageBody:{
         type:String,
         required:[true, 'Message Body is required']
-    },
-    room:{
-        type:String,
-        required:[true, 'Room is required']
     }
 }, {timestamps:true})
 
