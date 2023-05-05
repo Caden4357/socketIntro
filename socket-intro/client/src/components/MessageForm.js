@@ -9,7 +9,6 @@ const MessageForm = (props) => {
     const sendMessage = (e) => {
         e.preventDefault();
         const finalMessage = {
-            // date: new Date().toLocaleTimeString(), 
             messageBody: message, 
             username: loggedInUser.username,
             room:'memes'

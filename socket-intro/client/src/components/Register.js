@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Link, useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 const Register = (props) => {
     const navigate = useNavigate()
     const [login, setLogin] = useState({
@@ -14,7 +14,16 @@ const Register = (props) => {
         setLogin({ ...login, [e.target.name]: e.target.value })
     }
     const submitHandler = (e) => {
-
+        e.preventDefault();
+        axios.post('http://localhost:8000/api/register', login, {withCredentials:true})
+            .then((res) => {
+                console.log(res);
+                window.localStorage.setItem('uuid', res.data.user._id)
+                navigate('/homepage')
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
     return (
         <div className='form-wrapper'>

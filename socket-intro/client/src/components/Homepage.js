@@ -3,13 +3,13 @@ import { Link, useNavigate} from 'react-router-dom';
 import {userContext} from '../context/userContext'
 import axios from 'axios';
 const Homepage = (props) => {
-    const {loggedInUser, setLoggedInUser} = useContext(userContext);
-    const uuid = window.localStorage.getItem('uuid');
-    
     const navigate = useNavigate()
+    const {loggedInUser, setLoggedInUser} = useContext(userContext);
+    
     const {socket, username} = props
     const [users, setUsers] = useState([])
-    console.log(uuid);
+    const uuid = window.localStorage.getItem('uuid');
+    // console.log(uuid);
     useEffect(() => {
         axios.get(`http://localhost:8000/api/loggedInUser/${uuid}`)
             .then((res) => {

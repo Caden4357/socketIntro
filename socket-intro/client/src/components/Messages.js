@@ -1,7 +1,8 @@
 import React, {useState, useRef, useEffect, useContext} from 'react';
 import MessageForm from './MessageForm';
 import { userContext } from '../context/userContext';
-
+import moment from 'moment';
+import axios from 'axios';
 const Messages = (props) => {
     const {loggedInUser, setLoggedInUser} = useContext(userContext);
     const {socket, username} = props
@@ -10,6 +11,15 @@ const Messages = (props) => {
 
     // ! broadcast message
     useEffect(() => {
+        console.log('In effect!!!!');
+        axios.get('http://localhost:8000/api/allMessages/memes')
+            .then((res) => {
+                console.log(res);
+                setMessages(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
         socket.on('broadcast-messages-to-memes', (data) => {
             setMessages((prevMessages) => [...prevMessages, data]);
         });
@@ -31,7 +41,7 @@ const Messages = (props) => {
                                 <div key={idx} className='indv-messages user'>
                                     <h3>{message.username} says:</h3>
                                     <p>{message.messageBody}</p>
-                                    <span>{message.createdAt}</span>
+                                    <span>{moment(message.createdAt).format('kk:mm:ss A')}</span>
                                 </div>
                             )
                         } else {
@@ -39,7 +49,7 @@ const Messages = (props) => {
                                 <div key={idx} className='indv-messages'>
                                     <h3>{message.username} says:</h3>
                                     <p>{message.messageBody}</p>
-                                    <span>{message.createdAt}</span>
+                                    <span>{moment(message.createdAt).format('kk:mm:ss A')}</span>
                                 </div>
                             )
                         }
