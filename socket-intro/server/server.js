@@ -27,8 +27,10 @@ const io = socket(server, {
 });
 module.exports = {io:io}
 require('./socket/socket');
-require('./routes/userRoutes')(app)
-require('./routes/messageRoutes')(app)
+require('./routes/userRoutes')(app);
+require('./routes/messageRoutes')(app);
+require('./routes/roomRoutes')(app);
+
 
 
 
