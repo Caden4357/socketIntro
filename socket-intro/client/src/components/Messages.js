@@ -19,7 +19,8 @@ const Messages = (props) => {
             .catch((err) => {
                 console.log(err);
             })
-        socket.on('broadcast-messages-to-memes', (data) => {
+        socket.on('broadcast-messages-to-room', (data) => {
+            console.log(data);
             setMessages((prevMessages) => [...prevMessages, data]);
         });
     }, []);
@@ -56,7 +57,7 @@ const Messages = (props) => {
                 }
                 <div ref={messageRef}></div>
             </div> 
-            <MessageForm socket={socket}/>
+            <MessageForm socket={socket} room={room}/>
         </div>
 )
 }

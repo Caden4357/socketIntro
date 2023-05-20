@@ -3,7 +3,7 @@ import { userContext } from '../context/userContext';
 import axios from 'axios';
 const MessageForm = (props) => {
     const {loggedInUser, setLoggedInUser} = useContext(userContext);
-    const {socket} = props
+    const {socket, room} = props
     const [message, setMessage] = useState('')
 
     const sendMessage = (e) => {
@@ -11,12 +11,12 @@ const MessageForm = (props) => {
         const finalMessage = {
             messageBody: message, 
             username: loggedInUser.username,
-            room:'memes'
+            room:room
         }
         axios.post('http://localhost:8000/api/newMessage', finalMessage, {withCredentials:true})
             .then((res) => {
-                console.log(res);
-                socket.emit('message-meme-room', res.data)
+                console.log("*********************", res);
+                socket.emit('message-room', res.data)
             })
             .catch((err) => {
                 console.log(err);

@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import {BrowserRouter, Link, Route, Routes, useLocation} from 'react-router-dom'
 import './App.css';
 import Homepage from './components/Homepage';
-import Memes from './components/Memes';
+import Room from './components/Room';
 import Nav from './components/Nav';
 import Login from './components/Login';
 import { UserProvider } from './context/userContext';
@@ -47,7 +47,7 @@ function App() {
           <Route path='/' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/> 
           <Route path='/homepage' element={<Homepage socket={socket}/>}/>
-          <Route path='/chat/:room' element={<Memes socket={socket}/>}/>
+          <Route path='/chat/:room' element={<Room socket={socket}/>}/>
         </Routes>
     </div>
   );

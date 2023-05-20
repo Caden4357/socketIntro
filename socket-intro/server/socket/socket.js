@@ -1,5 +1,4 @@
 let users = []
-let usersInMemes = []
 let {io} = require('../server')
 
 
@@ -25,23 +24,18 @@ io.on("connection", socket => {
     // ! Joining memes room
     socket.on('join-room', data => {
         socket.join(data.room)
-        console.log(data);
-        // let newUser = { id: socket.id, username: data.username }
-        // usersInMemes.push(newUser)
 
         io.to(data.room).emit("new-user-joined-memes", data.usersInRoom)
     })
     // ! Leaving memes room
     socket.on('user-leaving-room', (data) => {
-        // let updatedUsers = usersInMemes.filter((user) => user.id !== userThatLeft)
-        socket.leave('memes')
-        // usersInMemes = updatedUsers
-        io.to('memes').emit('current-users-in-room', data.updatedUsers)
+        socket.leave(data.room)
+        io.to(data.room).emit('current-users-in-room', data.updatedUsers)
     })
 
     // ! Messaging meme room
-    socket.on('message-meme-room', data => {
-        console.log(data);
-        io.emit('broadcast-messages-to-memes', data)
+    socket.on('message-room', data => {
+        console.log("*****************", data);
+        io.to(data.room).emit('broadcast-messages-to-room', data)
     })
 });

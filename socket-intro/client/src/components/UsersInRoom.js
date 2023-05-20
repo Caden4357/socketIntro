@@ -9,19 +9,8 @@ const UsersInRoom = (props) => {
     const {usersInRoom, setUsersInRoom} = useContext(socketContext);
 
     const { socket, room } = props;
-    
-    const leaveRoom = async () => {
-        try{
-            const updatedUsers = await axios.put(`http://localhost:8000/api/leaveRoom/${room}`, {username:loggedInUser.username, uuid:window.localStorage.getItem('uuid')})
-            console.log(updatedUsers);
-            setUsersInRoom(usersInRoom.filter((user) => user.username !== loggedInUser.username))
-            socket.emit('user-leaving-room', {user:socket.id, updatedUsers:updatedUsers})
-            navigate('/homepage')
-        }
-        catch(err){
-            console.log(err);
-        }
-    }
+
+
     // ! if you have different tabs open to test this will not work because the local storage is shared between tabs on the browser have to open a whole new browser for it to work
     const uuid = window.localStorage.getItem('uuid');
     console.log(uuid);
@@ -36,6 +25,21 @@ const UsersInRoom = (props) => {
         
 
     }, [])
+    
+
+    
+    const leaveRoom = async () => {
+        try{
+            const updatedUsers = await axios.put(`http://localhost:8000/api/leaveRoom/${room}`, {username:loggedInUser.username, uuid:window.localStorage.getItem('uuid')})
+            console.log(updatedUsers);
+            setUsersInRoom(usersInRoom.filter((user) => user.username !== loggedInUser.username))
+            socket.emit('user-leaving-room', {user:socket.id,room:room, updatedUsers:updatedUsers})
+            navigate('/homepage')
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
 
     useEffect(() => {  
         axios.get(`http://localhost:8000/api/usersInRoom/${room}`)
