@@ -14,7 +14,6 @@ function App() {
   // we don't need to destructure the 'setSocket' function since we won't be updating the socket state
   // const navigate = useNavigate()
   const location = useLocation().pathname;
-  console.log(location);
   const [socket] = useState(() => io(':8000'));
   const [isConnected, setIsConnected] = useState(socket.connected);
 
@@ -24,8 +23,6 @@ function App() {
   useEffect(() => {
     // we need to set up all of our event listeners
     // in the useEffect callback function
-    console.log('Running');
-
     socket.on('connect', () => {
       console.log('HERE');
       setIsConnected(true);
@@ -50,7 +47,7 @@ function App() {
           <Route path='/' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/> 
           <Route path='/homepage' element={<Homepage socket={socket}/>}/>
-          <Route path='/memes' element={<Memes socket={socket}/>}/>
+          <Route path='/chat/:room' element={<Memes socket={socket}/>}/>
         </Routes>
     </div>
   );

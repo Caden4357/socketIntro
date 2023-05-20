@@ -23,20 +23,20 @@ io.on("connection", socket => {
     })
 
     // ! Joining memes room
-    socket.on('join-memes', data => {
+    socket.on('join-room', data => {
         socket.join(data.room)
         console.log(data);
-        let newUser = { id: socket.id, username: data.username }
-        usersInMemes.push(newUser)
+        // let newUser = { id: socket.id, username: data.username }
+        // usersInMemes.push(newUser)
 
-        io.to(data.room).emit("new-user-joined-memes", usersInMemes)
+        io.to(data.room).emit("new-user-joined-memes", data.usersInRoom)
     })
     // ! Leaving memes room
-    socket.on('user-leaving-memes', (userThatLeft) => {
-        let updatedUsers = usersInMemes.filter((user) => user.id !== userThatLeft)
+    socket.on('user-leaving-room', (data) => {
+        // let updatedUsers = usersInMemes.filter((user) => user.id !== userThatLeft)
         socket.leave('memes')
-        usersInMemes = updatedUsers
-        io.to('memes').emit('current-users-in-room', usersInMemes)
+        // usersInMemes = updatedUsers
+        io.to('memes').emit('current-users-in-room', data.updatedUsers)
     })
 
     // ! Messaging meme room

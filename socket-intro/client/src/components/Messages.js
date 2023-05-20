@@ -5,14 +5,13 @@ import moment from 'moment';
 import axios from 'axios';
 const Messages = (props) => {
     const {loggedInUser, setLoggedInUser} = useContext(userContext);
-    const {socket} = props
+    const {socket, room} = props
     const messageRef = useRef(null)
     const [messages, setMessages] = useState([])
 
     // ! broadcast message
     useEffect(() => {
-        console.log('In effect!!!!');
-        axios.get('http://localhost:8000/api/allMessages/memes')
+        axios.get(`http://localhost:8000/api/allMessages/${room}`)
             .then((res) => {
                 console.log(res);
                 setMessages(res.data);
