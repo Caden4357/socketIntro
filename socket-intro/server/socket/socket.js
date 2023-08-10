@@ -21,19 +21,19 @@ io.on("connection", socket => {
         io.emit('new-user-joined-server', users)
     })
 
-    // ! Joining memes room
+    // ! Joining room
     socket.on('join-room', data => {
         socket.join(data.room)
 
-        io.to(data.room).emit("new-user-joined-memes", data.usersInRoom)
+        io.to(data.room).emit("new-user-joined-room", data.usersInRoom)
     })
-    // ! Leaving memes room
+    // ! Leaving room
     socket.on('user-leaving-room', (data) => {
         socket.leave(data.room)
         io.to(data.room).emit('current-users-in-room', data.updatedUsers)
     })
 
-    // ! Messaging meme room
+    // ! Messaging room
     socket.on('message-room', data => {
         console.log("*****************", data);
         io.to(data.room).emit('broadcast-messages-to-room', data)

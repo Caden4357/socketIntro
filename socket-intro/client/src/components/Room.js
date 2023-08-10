@@ -11,9 +11,9 @@ const Memes = (props) => {
     const {usersInRoom, setUsersInRoom} = useContext(socketContext);
     // ! New user joined memes
     useEffect(() => {
-        socket.on('new-user-joined-memes', data => {
-            console.log("%%%%%%%%%%%%%%", data);
-            console.log('firing NUJM');
+        socket.on('new-user-joined-room', data => {
+            // console.log("%%%%%%%%%%%%%%", data);
+            // console.log('firing NUJM');
             // setUsersInMemes(data)
             setUsersInRoom(data)
         })
@@ -22,8 +22,8 @@ const Memes = (props) => {
     // ! Update users in room after user has left
     useEffect(() => {
         socket.on('current-users-in-room', data => {
-            console.log("**************", data);
-            console.log('firing CUIN');
+            // console.log("**************", data);
+            // console.log('firing CUIN');
             // setUsersInMemes(data)
             setUsersInRoom(data.data.users_in_room)
         })

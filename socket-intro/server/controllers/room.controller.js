@@ -20,10 +20,10 @@ module.exports = {
             console.log(req.body);
             const roomToJoin = await Room.findOneAndUpdate(
                 {roomName:req.params.roomName}, 
-                {$push: {users_in_room: req.body}}, 
+                {$addToSet: {users_in_room: req.body}}, 
                 {new:true, runValidators:true}
             );
-            console.log(roomToJoin);
+            // console.log(roomToJoin);
             res.status(202).json(roomToJoin);
         }
         catch(err){

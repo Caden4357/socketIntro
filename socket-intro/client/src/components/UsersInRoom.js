@@ -22,8 +22,12 @@ const UsersInRoom = (props) => {
             .catch((err) => {
                 console.log(err);
             })
-        
-
+        return async () => {
+            const updatedUsers = await axios.put(`http://localhost:8000/api/leaveRoom/${room}`, {username:loggedInUser.username, uuid:uuid})
+            console.log(updatedUsers);
+            setUsersInRoom(usersInRoom.filter((user) => user.username !== loggedInUser.username))
+            socket.emit('user-leaving-room', {user:socket.id,room:room, updatedUsers:updatedUsers})
+        }
     }, [])
     
 
